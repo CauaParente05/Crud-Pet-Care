@@ -35,7 +35,13 @@ def visualizarPet():
         print(f"Digite uma idade valida! (Erro: {e})")
 
 
-while True:
-
-    opcao = input("Digite o número da opção escolha: ")
+def deletePet():
+    nome = input("Digite o nome do pet: ")
+    arquivo_nome = f"Pet{nome}.txt"
+    try:
+        # Verifica se o arquivo existe antes de tentar remover
+        os.remove(arquivo_nome)
+        print(f"Arquivo {arquivo_nome} foi deletado com sucesso!")
+    except FileNotFoundError as erro:
+        print(f"Arquivo não encontrado! (Erro: {erro})")
 
