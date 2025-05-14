@@ -23,12 +23,13 @@ def addPet():
             tipo = str(input("Digite o tipo do seu pet(Cachorro/Gato/Ave):"))
     except ValueError as erro: #troquei o nome da variavel e para erro
         print(f"Digite uma idade valida! (Erro: {erro})")#mesma coisa
-        return
+    
 
     with open(f"Pet{nome}.txt", "w", encoding="UTF-8") as file:
         file.write(f"Nome: {nome}\n")
         file.write(f"Idade: {idade}\n")
         file.write(f"Tipo: {tipo}\n")
+        return
 
     
 def visualizarPet():
@@ -87,5 +88,4 @@ while True:
         print("PROGRAMA ENCERRADO")
         break
     else:
-        print("Opção inválida!")
-
+        print("Opção inválida!, Escolha as opções oferecidas.")
