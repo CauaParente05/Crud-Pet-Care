@@ -32,3 +32,25 @@ def addEventos():
         print(f"Este pet ainda nao foi cadastrado,{e}")
 def editaEventos():
     nome = input("Digite o nome do pet que você deseja editar o evento: ")
+def data_para_numero(data):
+    partes = data.split("/")
+    return int(partes[2] + partes[1] + partes[0])   
+def eventosNaSemana():
+    hoje = input("Digite a data de hoje (DD/MM/AAAA): ")
+    hoje_num = data_para_numero(hoje)
+    semana_futura_num = hoje_num + 7 
+    eventos_encontrados = []
+    for arquivo in os.listdir():
+        if arquivo.startswith("Evento") and arquivo.endswith(".txt"):
+            partes = arquivo.replace("Evento", "").replace(".txt", "").split("_")
+            if len(partes) == 2:
+                nome, data_evento = partes
+                data_evento_num = int(data_evento)
+                if hoje_num <= data_evento_num <= semana_futura_num:
+                    eventos_encontrados.append((nome, data_evento))
+    if eventos_encontrados:
+        print("Eventos para esta semana:")
+        for pet, data in eventos_encontrados:
+            print(f"Pet: {pet} - Data do evento: {str(data[:2])}/{str(data[2:4])}/{str(data[4:])}")
+    else:
+        print("Nenhum evento programado para esta semana.")
