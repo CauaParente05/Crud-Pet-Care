@@ -48,7 +48,7 @@ def editarPet():#nao to conseguindo ainda
     nome = input("Digite o nome do pet: ")
     # Abrir o arquivo original para leitura
     try:
-        with open(f"Pet{nome}.txt", "r", encoding="UTF-8") as file:
+        with open(f"Pet{nome}.txt", "r", encoding="UTF-8") as file:#escrever caract especial
             linhas = file.readlines()
         # Modificar a linha desejada (por exemplo, a linha 2)
         linhas[1] = 'Esta é a nova linha 2\n'
@@ -57,7 +57,7 @@ def editarPet():#nao to conseguindo ainda
             file.writelines(linhas)
     except FileNotFoundError as erro: #troquei o nome da variavel e para erro
         print(f"Digite nome inválido (Erro: {erro})")
-
+# caso escolha editar, o nome , ver como editar o nome do arquivo!
 def deletePet(): 
     nome = input("Digite o nome do pet: ")
     try:
