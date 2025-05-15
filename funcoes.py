@@ -1,5 +1,7 @@
 import os
 import time 
+import eventos
+import sys
 
 def menu_principal():
         print("-="*12,)
@@ -9,7 +11,8 @@ def menu_principal():
         print('2. Visualizar Pet (Cachorro/Gato/Ave)')
         print('3. Editar Pet (Cachorro/Gato/Ave)')
         print('4. Excluir Pet (Cachorro/Gato/Ave)')
-        print('5. Para Finalizar')
+        print('5. Para Abrir o Menu de Eventos')
+        print('6. Para Finalizar')
         print("-="*12,)
         #tirei o input de opção que estava errado aqui e so deixei no main
 
@@ -17,7 +20,7 @@ def validar_nome():
     while True:
         nome = input("Digite o nome do pet: ").capitalize()
         
-        if nome.replace(" ", "").isalpha():  # O comando replace serve para que seja possivel colocar 2 nomes ou espaços em branco e o isalpha verifica se a string contém apenas letras  
+        if nome.replace(" "," ").isalpha():  # O comando replace serve para que seja possivel colocar 2 nomes ou espaços em branco e o isalpha verifica se a string contém apenas letras  
             return nome
         else:
             print("Erro: O nome do pet deve conter apenas letras! Tente novamente.")
@@ -156,7 +159,10 @@ def escolhas_menu():
         elif opcao == 4:
             deletePet()      
         elif opcao == 5:
+            eventos.escolhas_menu_eventos()
+            time.sleep(1)
+        elif opcao == 6:
             print("PROGRAMA ENCERRADO")
-            break
+            sys.exit()
         else:
-            print("Opção inválida!")
+            print("Opção inválida! Digite o número de uma das opções exibida")

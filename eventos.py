@@ -1,19 +1,22 @@
-ARQUIVO_PETS = "pets.txt"
 ARQUIVOS_EVENTOS = "eventos.txt"
+import sys
+import funcoes
 import os
+import time
 #date.time
 def dataFormatada(data):
     return data.replace("/", "")
 def menu_cuidados():
-    while True:
-        print("-="*12,)
-        print('MENU CUIDADOS COM O PET')
-        print("-="*12,)
-        print('1. Adicionar eventos (Vacina/Consulta/Rémedio)')
-        print('2. Visualizar eventos (Vacina/Consulta/Rémedio)')
-        print('3. Editar eventos (Vacina/Consulta/Rémedio)')
-        print('4. Excluir eventos (Vacina/Consulta/Rémedio)')
-        print('5. Para Menu Principal(adicionar Pets)')
+    print("-="*12,)
+    print('MENU CUIDADOS COM O PET')
+    print("-="*12,)
+    print('1. Adicionar eventos (Vacina/Consulta/Rémedio)')
+    print('2. Visualizar eventos (Vacina/Consulta/Rémedio)')
+    print('3. Editar eventos (Vacina/Consulta/Rémedio)')
+    print('4. Excluir eventos (Vacina/Consulta/Rémedio)')
+    print('5. Volta para o Menu Principal')
+    print('6. Encerra o programa')
+    print("-="*12,)
 def addEventos():
     nome = input("Digite o nome do pet que você deseja realizar o evento: ")
     try:
@@ -54,3 +57,30 @@ def eventosNaSemana():
             print(f"Pet: {pet} - Data do evento: {str(data[:2])}/{str(data[2:4])}/{str(data[4:])}")
     else:
         print("Nenhum evento programado para esta semana.")
+
+def escolhas_menu_eventos():
+    while True:
+        menu_cuidados()
+        time.sleep(1)
+        try:
+            opcao = int(input("Digite o número da opção escolhida: "))
+        except ValueError:
+            print("Opção inválida! Digite apenas números.")
+            continue
+
+        if opcao == 1:
+            addEventos()
+        elif opcao == 2:
+            eventosNaSemana() #Apenas placeHolder
+        elif opcao == 3:
+            editaEventos() #Apenas placeHolder
+        elif opcao == 4:
+            editaEventos() #Apenas placeHolder
+        elif opcao == 5:
+            funcoes.escolhas_menu()
+            time.sleep(1)
+        elif opcao == 6:
+            print("PROGRAMA ENCERRADO")
+            sys.exit()   
+        else:
+            print("Opção inválida! Digite o número de uma das opções exibida")
