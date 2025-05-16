@@ -1,7 +1,5 @@
-ARQUIVO_PETS = "pets.txt"
-ARQUIVOS_EVENTOS = "eventos.txt"
 import os
-#date.time
+import funcoes
 def dataFormatada(data):
     return data.replace("/", "")
 def menu_cuidados():
@@ -14,6 +12,7 @@ def menu_cuidados():
         print('3. Editar eventos (Vacina/Consulta/Rémedio)')
         print('4. Excluir eventos (Vacina/Consulta/Rémedio)')
         print('5. Para Menu Principal(adicionar Pets)')
+
 def addEventos():
     nome = input("Digite o nome do pet que você deseja realizar o evento: ")
     try:
@@ -30,5 +29,28 @@ def addEventos():
                 file.write(f"Data Formada: {dataFormatada(data_consulta)}")
     except FileNotFoundError as e:        
         print(f"Este pet ainda nao foi cadastrado,{e}")
-def editaEventos():
-    nome = input("Digite o nome do pet que você deseja editar o evento: ")
+
+def escolhas_menu():
+    while True:
+        menu_cuidados()
+        time.sleep(1)
+        try:
+            opcao = int(input("Digite o número da opção escolhida: "))
+        except ValueError:
+            print("Opção inválida! Digite apenas números.")
+            continue
+        if opcao == 1:
+            addEventos()
+        elif opcao == 2:
+            continue
+        elif opcao == 3:
+            continue
+        elif opcao == 4:
+            continue
+        elif opcao == 5:
+            print("PROGRAMA ENCERRADO")
+            break
+        elif opcao == 6:
+            funcoes.menu_principal
+        else:
+            print("Opção inválida!")
