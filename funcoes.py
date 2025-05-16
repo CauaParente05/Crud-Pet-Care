@@ -123,7 +123,7 @@ def editarPet():
             file.writelines(linhas)
         
         print(f"Arquivo Pet{nome}.txt atualizado com sucesso!")    
-    except FileNotFoundError as erro: #troquei o nome da variavel e para erro
+    except FileNotFoundError as erro: 
         print(f"Digite um nome inválido (Erro: {erro})")    
     except IndexError:
         print(f"Erro: Este pet não existe portanto não pode ser editado!.")

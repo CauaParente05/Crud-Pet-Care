@@ -1,5 +1,6 @@
 import os
 import funcoes
+import time
 def dataFormatada(data):
     return data.replace("/", "")
 def menu_cuidados():
@@ -14,7 +15,7 @@ def menu_cuidados():
         print('5. Para Menu Principal(adicionar Pets)')
 
 def addEventos():
-    nome = input("Digite o nome do pet que você deseja realizar o evento: ")
+    nome = funcoes.validar_nome()
     try:
         if os.path.isfile(f"Pet{nome}.txt"):
             data = input("Digite a data do evento: ")
@@ -29,6 +30,18 @@ def addEventos():
                 file.write(f"Data Formada: {dataFormatada(data_consulta)}")
     except FileNotFoundError as e:        
         print(f"Este pet ainda nao foi cadastrado,{e}")
+
+def deleteEventos():
+    nome = funcoes.validar_nome()
+    arquivo = f"Pet{nome}.txt"
+    try:
+        if os.path.isfile(arquivo):
+            os.remove(f"Pet{nome}.txt")
+            print(f"Arquivo 'Pet{nome}.txt' foi deletado com sucesso!")
+        else:
+            print(f"Nome do pet inválido! O arquivo '{arquivo}' não foi encontrado.")
+    except FileNotFoundError as erro:
+        print(f"Arquivo não encontrado! (Erro: {erro})")
 
 def escolhas_menu():
     while True:
@@ -46,7 +59,7 @@ def escolhas_menu():
         elif opcao == 3:
             continue
         elif opcao == 4:
-            continue
+            deleteEventos()
         elif opcao == 5:
             print("PROGRAMA ENCERRADO")
             break
