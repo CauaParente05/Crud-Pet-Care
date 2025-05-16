@@ -1,5 +1,3 @@
-ARQUIVO_PETS = "pets.txt"
-ARQUIVOS_EVENTOS = "eventos.txt"
 import os
 #date.time
 def dataFormatada(data):
