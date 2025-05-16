@@ -149,19 +149,18 @@ def escolhas_menu():
         except ValueError:
             print("Opção inválida! Digite apenas números.")
             continue
-
-    if opcao == 1:
-        addPet()
-    elif opcao == 2:
-        visualizarPet()
-    elif opcao == 3:
-        editarPet()
-    elif opcao == 4:
-        deletePet()   
-    elif opcao == 5:
-        print("PROGRAMA ENCERRADO")
-        break
-    elif opcao == 6:
-        eventos.menu_cuidados()
-    else:
-        print("Opção inválida!")
+        if opcao == 1:
+            addPet()
+        elif opcao == 2:
+            visualizarPet()
+        elif opcao == 3:
+            editarPet()
+        elif opcao == 4:
+            deletePet()   
+        elif opcao == 5:
+            print("PROGRAMA ENCERRADO")
+            break
+        elif opcao == 6:
+            eventos.menu_cuidados()
+        else:
+            print("Opção inválida!")
