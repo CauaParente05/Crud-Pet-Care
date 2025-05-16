@@ -1,7 +1,7 @@
 import os
 import time 
 import eventos
-import sys
+
 
 def menu_principal():
         print("-="*12,)
@@ -11,8 +11,8 @@ def menu_principal():
         print('2. Visualizar Pet (Cachorro/Gato/Ave)')
         print('3. Editar Pet (Cachorro/Gato/Ave)')
         print('4. Excluir Pet (Cachorro/Gato/Ave)')
-        print('5. Para Abrir o Menu de Eventos')
-        print('6. Para Finalizar')
+        print('5. Para Finalizar')
+        print('6. Menu de Eventos Pet')
         print("-="*12,)
         #tirei o input de opção que estava errado aqui e so deixei no main
 
@@ -123,7 +123,7 @@ def editarPet():
             file.writelines(linhas)
         
         print(f"Arquivo Pet{nome}.txt atualizado com sucesso!")    
-    except FileNotFoundError as erro: #troquei o nome da variavel e para erro
+    except FileNotFoundError as erro: 
         print(f"Digite um nome inválido (Erro: {erro})")    
     except IndexError:
         print(f"Erro: Este pet não existe portanto não pode ser editado!.")
@@ -149,20 +149,19 @@ def escolhas_menu():
         except ValueError:
             print("Opção inválida! Digite apenas números.")
             continue
-
         if opcao == 1:
             addPet()
         elif opcao == 2:
             visualizarPet()
         elif opcao == 3:
-            editarPet()  
+            editarPet()
         elif opcao == 4:
-            deletePet()      
+            deletePet()   
         elif opcao == 5:
-            eventos.escolhas_menu_eventos()
-            time.sleep(1)
-        elif opcao == 6:
             print("PROGRAMA ENCERRADO")
-            sys.exit()
+            break
+        elif opcao == 6:
+            eventos.menu_cuidados()
+            time.sleep(1)
         else:
-            print("Opção inválida! Digite o número de uma das opções exibida")
+            print("Opção inválida!")
