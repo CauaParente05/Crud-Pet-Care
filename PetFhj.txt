@@ -1,0 +1,3 @@
+Nome: Fhj
+Idade: 67
+Tipo: Ave
