@@ -1,7 +1,7 @@
 import os
 import time 
 import eventos
-
+import sys
 
 def menu_principal():
         print("-="*12,)
@@ -11,8 +11,8 @@ def menu_principal():
         print('2. Visualizar Pet (Cachorro/Gato/Ave)')
         print('3. Editar Pet (Cachorro/Gato/Ave)')
         print('4. Excluir Pet (Cachorro/Gato/Ave)')
-        print('5. Para Finalizar')
-        print('6. Menu de Eventos Pet')
+        print('5. Menu de Eventos Pet')
+        print('6. Para Finalizar')
         print("-="*12,)
         #tirei o input de opção que estava errado aqui e so deixei no main
 
@@ -156,12 +156,11 @@ def escolhas_menu():
         elif opcao == 3:
             editarPet()
         elif opcao == 4:
-            deletePet()   
+            deletePet()
         elif opcao == 5:
-            print("PROGRAMA ENCERRADO")
-            break
+            eventos.escolhas_menu_eventos()   
         elif opcao == 6:
-            eventos.menu_cuidados()
-            time.sleep(1)
+            print("PROGRAMA ENCERRADO")
+            sys.exit()
         else:
-            print("Opção inválida!")
+            print("Opção inválida! Digite o número de uma das opções exibida")

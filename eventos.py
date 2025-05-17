@@ -1,9 +1,11 @@
 import os
 import funcoes
 import time
+import sys
+
 def dataFormatada(data):
     return data.replace("/", "")
-def menu_cuidados():
+def menu_eventos():
         print("-="*12,)
         print('MENU CUIDADOS COM O PET')
         print("-="*12,)
@@ -12,30 +14,34 @@ def menu_cuidados():
         print('3. Editar eventos (Vacina/Consulta/Rémedio)')
         print('4. Excluir eventos (Vacina/Consulta/Rémedio)')
         print('5. Para Menu Principal(adicionar Pets)')
+        print('6. Para Finalizar')
+        print("-="*12,)
 
 def addEventos():
     nome = funcoes.validar_nome()
     try:
-        if os.path.isfile(f"Pet{nome}.txt"):
-            data = input("Digite a data do evento: ")
-            vacina = input("Digite a vacina do pet: ")
-            consulta = input("Digite o tipo de consulta: ")
-            data_consulta = input("Digite a data da consulta: ")
-            with open(f"Evento{nome}{dataFormatada(data)}.txt", "w", encoding="UTF-8") as file:
+        if os.path.isfile(f"Pet_{nome}.txt"):
+            data = input("Digite a data do evento (AAAA/MM/DD): ").strip()
+            vacina = input("Digite a vacina do pet: ").strip()
+            consulta = input("Digite o tipo de consulta: ").strip()
+            data_consulta = input("Digite a data da consulta (AAAA/MM/DD): ").strip()
+            nome_arquivo_evento = f"Evento_{nome}_{dataFormatada(data)}.txt"
+            with open(nome_arquivo_evento, "w", encoding="UTF-8") as file:
                 file.write(f"Nome: {nome}\n")
                 file.write(f"Data: {data}\n")
                 file.write(f"Vacina: {vacina}")
                 file.write(f"Consulta: {consulta}")
                 file.write(f"Data próxima Consulta: {dataFormatada(data_consulta)}")
+            print(f"Evento {nome_arquivo_evento} foi registrado com sucesso!")
     except FileNotFoundError as e:        
         print(f"Este pet ainda nao foi cadastrado,{e}")
 
 
 def visualizarEvento():
     nome = funcoes.validar_nome()
-    data = input("Digite a data do evento (DD/MM/AAAA): ").strip()  # Solicita a data do evento
+    data = input("Digite a data do evento (AAAA/MM/DD): ").strip()  # Solicita a data do evento
 
-    nome_arquivo_evento = f"Evento{nome}{dataFormatada(data)}.txt"
+    nome_arquivo_evento = f"Evento_{nome}_{dataFormatada(data)}.txt"
 
     if not os.path.isfile(nome_arquivo_evento):  # verifica a existencia
         print(f"\nErro: O evento '{nome_arquivo_evento}' não foi encontrado! Verifique se digitou o nome correto.")
@@ -53,7 +59,7 @@ def visualizarEvento():
 
 def editarEvento():
     nome = input("Digite o nome do pet do evento: ").strip()
-    data_evento = input("Digite a data do evento (DD/MM/AAAA): ").strip()
+    data_evento = input("Digite a data do evento (AAAA/MM/DD): ").strip()
     nome_arquivo_evento = f"Evento_{nome}_{dataFormatada(data_evento)}.txt"
 
     if not os.path.isfile(nome_arquivo_evento):
@@ -69,8 +75,8 @@ def editarEvento():
         print(f"1. Nome: {linhas[0].split(':')[1].strip()}")
         print(f"2. Data: {linhas[1].split(':')[1].strip()}")
         print(f"3. Vacina: {linhas[2].split(':')[1].strip()}")
-        print(f"3. Vacina: {linhas[3].split(':')[1].strip()}")
-        print(f"3. Data próxima consulta: {linhas[4].split(':')[1].strip()}")
+        print(f"4. Consulta: {linhas[3].split(':')[1].strip()}")
+        print(f"5. Data próxima consulta: {linhas[4].split(':')[1].strip()}")
 
         print("\nDigite as novas informações (ou pressione Enter para manter o valor atual):")
         novo_nome = input(f"Nome ({linhas[0].split(': ')[1].strip()}): ").strip() or linhas[0].split(": ")[1].strip()
@@ -103,9 +109,9 @@ def deleteEventos():
     except FileNotFoundError as erro:
         print(f"Arquivo não encontrado! (Erro: {erro})")
 
-def escolhas_menu():
+def escolhas_menu_eventos():
     while True:
-        menu_cuidados()
+        menu_eventos()
         time.sleep(1)
         try:
             opcao = int(input("Digite o número da opção escolhida: "))
@@ -122,10 +128,9 @@ def escolhas_menu():
         elif opcao == 4:
             deleteEventos()
         elif opcao == 5:
-            print("PROGRAMA ENCERRADO")
-            break
+            funcoes.menu_principal()
         elif opcao == 6:
-            funcoes.menu_principal
-            time.sleep(1)
+            print("PROGRAMA ENCERRADO")
+            sys.exit()
         else:
-            print("Opção inválida!")
+            print("Opção inválida! Digite o número de uma das opções exibida")
