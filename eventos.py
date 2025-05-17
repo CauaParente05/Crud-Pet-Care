@@ -2,9 +2,47 @@ import os
 import funcoes
 import time
 import sys
+import datetime 
 
 def dataFormatada(data):
     return data.replace("/", "")
+
+def validarVacina():
+    while True:
+        vacina = input("Digite a vacina do pet: ").strip()
+        
+        if vacina.isalpha(): #isalpha verifica se a string contém apenas letras
+            return vacina
+        else:
+            print("Erro: O campo de vacina deve conter apenas letras! Tente novamente.")
+            
+def validarConsulta():
+    while True:
+        consulta = input("Digite o tipo de consulta: ").strip()
+        
+        if consulta.isalpha(): #isalpha verifica se a string contém apenas letras  
+            return consulta
+        else:
+            print("Erro: O campo de consulta deve conter apenas letras! Tente novamente.")
+            
+def formatarDataParaVisualizacao(data):
+    return f"{data[:4]}/{data[4:6]}/{data[6:]}"
+
+def validaData(data):
+    try:
+        datetime.datetime.strptime(data, "%Y/%m/%d")  # Verifica se a data está correta
+        return True
+    except ValueError:
+        return False
+
+def solicitarData():
+    while True:
+        data = input("Digite a data do evento (AAAA/MM/DD): ").strip()
+        if validaData(data):
+            return data
+        else:
+            print("Formato de data inválido! Tente novamente no formato correto (AAAA/MM/DD).")
+
 def menu_eventos():
         print("-="*12,)
         print('MENU CUIDADOS COM O PET')
@@ -13,33 +51,36 @@ def menu_eventos():
         print('2. Visualizar eventos (Vacina/Consulta/Rémedio)')
         print('3. Editar eventos (Vacina/Consulta/Rémedio)')
         print('4. Excluir eventos (Vacina/Consulta/Rémedio)')
-        print('5. Para Menu Principal(adicionar Pets)')
+        print('5. Para Menu Principal (adicionar Pets)')
         print('6. Para Finalizar')
         print("-="*12,)
 
 def addEventos():
     nome = funcoes.validar_nome()
     try:
-        if os.path.isfile(f"Pet_{nome}.txt"):
-            data = input("Digite a data do evento (AAAA/MM/DD): ").strip()
-            vacina = input("Digite a vacina do pet: ").strip()
-            consulta = input("Digite o tipo de consulta: ").strip()
-            data_consulta = input("Digite a data da consulta (AAAA/MM/DD): ").strip()
+        if os.path.isfile(f"Pet{nome}.txt"):
+            data = solicitarData()
+            vacina = validarVacina()
+            consulta = validarConsulta()
+            data_consulta = solicitarData()
             nome_arquivo_evento = f"Evento_{nome}_{dataFormatada(data)}.txt"
             with open(nome_arquivo_evento, "w", encoding="UTF-8") as file:
                 file.write(f"Nome: {nome}\n")
-                file.write(f"Data: {data}\n")
-                file.write(f"Vacina: {vacina}")
-                file.write(f"Consulta: {consulta}")
-                file.write(f"Data próxima Consulta: {dataFormatada(data_consulta)}")
-            print(f"Evento {nome_arquivo_evento} foi registrado com sucesso!")
+                file.write(f"Data: {dataFormatada(data)}\n")
+                file.write(f"Vacina: {vacina}\n")
+                file.write(f"Consulta: {consulta}\n")
+                file.write(f"Data para a próxima Consulta: {dataFormatada(data_consulta)}\n")
+                
+        print(f"Evento {nome_arquivo_evento} foi registrado com sucesso!")
     except FileNotFoundError as e:        
         print(f"Este pet ainda nao foi cadastrado,{e}")
 
 
 def visualizarEvento():
     nome = funcoes.validar_nome()
-    data = input("Digite a data do evento (AAAA/MM/DD): ").strip()  # Solicita a data do evento
+    data = solicitarData() # Solicita a data do evento
+    if not data:
+        return
 
     nome_arquivo_evento = f"Evento_{nome}_{dataFormatada(data)}.txt"
 
@@ -49,9 +90,14 @@ def visualizarEvento():
 
     try:
         with open(nome_arquivo_evento, "r", encoding="UTF-8") as file:  # abre no modo leitura
-            conteudo_Pet = file.read()
-            print(f"\n Conteúdo do evento '{nome_arquivo_evento}':\n")
-            print(conteudo_Pet)        
+            linhas = file.readlines()
+        
+        print(f"\nConteúdo do evento '{nome_arquivo_evento}':\n")
+        print(f"1. Nome: {linhas[0].split(':')[1].strip()}")
+        print(f"2. Data: {formatarDataParaVisualizacao(linhas[1].split(':')[1].strip())}")
+        print(f"3. Vacina: {linhas[2].split(':')[1].strip()}")
+        print(f"4. Consulta: {linhas[3].split(':')[1].strip()}")
+        print(f"5. Data próxima consulta: {formatarDataParaVisualizacao(linhas[4].split(':')[1].strip())}")      
 
     except Exception as erro:  
         print(f"\n Erro ao visualizar o evento: {erro}")
@@ -59,7 +105,9 @@ def visualizarEvento():
 
 def editarEvento():
     nome = input("Digite o nome do pet do evento: ").strip()
-    data_evento = input("Digite a data do evento (AAAA/MM/DD): ").strip()
+    data_evento = solicitarData()
+    if not data_evento:
+        return
     nome_arquivo_evento = f"Evento_{nome}_{dataFormatada(data_evento)}.txt"
 
     if not os.path.isfile(nome_arquivo_evento):
@@ -99,15 +147,21 @@ def editarEvento():
 
 def deleteEventos():
     nome = funcoes.validar_nome()
-    arquivo = f"Pet{nome}.txt"
+    data_evento = solicitarData()
+    if not data_evento:
+        return
+    
+    nome_arquivo_evento = f"Evento_{nome}_{dataFormatada(data_evento)}.txt"
+    
+    if not os.path.isfile(nome_arquivo_evento):
+        print(f"Erro: O evento '{nome_arquivo_evento}' não foi encontrado.")
+        return
+    
     try:
-        if os.path.isfile(arquivo):
-            os.remove(f"Pet{nome}.txt")
-            print(f"Arquivo 'Pet{nome}.txt' foi deletado com sucesso!")
-        else:
-            print(f"Nome do pet inválido! O arquivo '{arquivo}' não foi encontrado.")
+        os.remove(nome_arquivo_evento)
+        print(f"Evento '{nome_arquivo_evento}' foi deletado com sucesso!")
     except FileNotFoundError as erro:
-        print(f"Arquivo não encontrado! (Erro: {erro})")
+        print(f"Erro ao excluir evento: {erro}")
 
 def escolhas_menu_eventos():
     while True:
