@@ -49,7 +49,7 @@ def cuidados_cachorro(tipo, idade):
         ('grande porte', 'adulto'): "Exercício intenso (correr, nadar), controle rigoroso de peso, atenção ao quadril e articulações.",
         ('grande porte', 'idoso'): "Suplementação com condroitina e glucosamina, fisioterapia, suporte ergonômico, monitoramento cardíaco."
     }
-    return print(cuidados.get(tipo, idade))
+    return cuidados.get(tipo, idade)
 
 def cuidados_gato(tipo, idade):
     cuidados = {
@@ -63,7 +63,7 @@ def cuidados_gato(tipo, idade):
         ('grande porte', 'adulto'): "Exercícios leves (por causa do peso), dieta com baixa caloria para evitar sobrepeso, escovação frequente, caixa de areia ampla.",
         ('grande porte', 'idoso'): "Atenção especial às articulações (peso extra → risco de artrose), cama ortopédica, enriquecimento ambiental calmo, monitoramento do coração."
     }
-    return print(cuidados.get(tipo, idade))
+    return cuidados.get(tipo, idade)
 
 def cuidados_ave(tipo, idade):
 
@@ -78,8 +78,7 @@ def cuidados_ave(tipo, idade):
         ('grande porte', 'adulto'): "Estímulo constante, alimentação variada e rica em nutrientes, interação social, exercícios diários.",
         ('grande porte', 'idoso'): "Check-ups regulares, adaptação de poleiros, dieta monitorada, estímulo cognitivo para prevenir tédio."
     } 
-    return print (cuidados.get(tipo, idade))
-
+    return cuidados.get(tipo, idade)
 
 animal=input("Qual o seu animal? ").lower()
 nome=input("Digite o nome do seu animal: ")
