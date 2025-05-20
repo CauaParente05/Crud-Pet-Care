@@ -127,14 +127,14 @@ def editar_evento():
     data_evento = solicitar_data()
     if not data_evento:
         return
-    nome_arquivo_evento = f"Evento_{nome}_{data_formatada(data_evento)}.txt"
+    nome_arquivo_evento_anterior = f"Evento_{nome}_{data_formatada(data_evento)}.txt"
 
-    if not os.path.isfile(nome_arquivo_evento):
-        print(f"Erro: O evento '{nome_arquivo_evento}' não foi encontrado.")
+    if not os.path.isfile(nome_arquivo_evento_anterior):
+        print(f"Erro: O evento '{nome_arquivo_evento_anterior}' não foi encontrado.")
         return
 
     try:
-        with open(nome_arquivo_evento, "r", encoding="UTF-8") as file:
+        with open(nome_arquivo_evento_anterior, "r", encoding="UTF-8") as file:
             linhas = file.readlines()
 
         # Exibir informações atuais; poderia ser um for tb
@@ -145,8 +145,7 @@ def editar_evento():
         print(f"4. Consulta: {linhas[3].split(':')[1].strip()}")
         print(f"5. Data próxima consulta: {linhas[4].split(':')[1].strip()}")
 
-        print(
-            "\nDigite as novas informações (ou pressione Enter para manter o valor atual):")
+        print("\nDigite as novas informações (ou pressione Enter para manter o valor atual):")
         novo_nome = input(f"Nome ({linhas[0].split(': ')[1].strip()}): ").strip(
         ) or linhas[0].split(": ")[1].strip()
         nova_data = input(f"Data do evento ({linhas[1].split(': ')[1].strip()}): ").strip(
@@ -158,6 +157,10 @@ def editar_evento():
         nova_data_consulta = input(f"Data da consulta ({linhas[4].split(': ')[1].strip()}): ").strip(
         ) or linhas[4].split(": ")[1].strip()
 
+        nome_arquivo_evento = f"Evento_{nome.capitalize()}_{data_formatada(nova_data)}.txt"
+        
+        os.remove(nome_arquivo_evento_anterior)
+        
         with open(nome_arquivo_evento, "w", encoding="UTF-8") as file:
             file.write(f"Nome: {novo_nome}\n")
             file.write(f"Data do evento: {nova_data}\n")

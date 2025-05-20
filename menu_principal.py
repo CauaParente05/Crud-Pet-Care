@@ -57,8 +57,8 @@ def validar_novo_porte(nome, porte):
         try:
             with open(f"Pet{nome}.txt", "r", encoding="UTF-8") as file:
                 linhas = file.readlines()
-                novo_porte = input("Novo porte (Cachorro/Gato/Ave) ou (pressione Enter caso não deseje trocar): ").strip().capitalize()
-                novo_porte = novo_porte if novo_porte else linhas[3].split(":")[1].strip()[1].strip()
+                novo_porte = input("Novo porte (Pequeno/Médio/Grande porte) ou (pressione Enter caso não deseje trocar): ").strip().capitalize()
+                novo_porte = novo_porte if novo_porte else linhas[3].split(":")[1].strip()
                 if novo_porte == "Medio":
                     novo_porte = "Médio"
                 elif novo_porte == "Grande":
@@ -76,7 +76,7 @@ def validar_novo_tipo(nome, tipo):
         try:
             with open(f"Pet{nome}.txt", "r", encoding="UTF-8") as file:
                 linhas = file.readlines()
-                novo_tipo = input("Novo tipo (pressione Enter caso não deseje trocar): ").strip().capitalize()
+                novo_tipo = input("Novo tipo (Cachorro/Gato/Ave) ou (pressione Enter caso não deseje trocar): ").strip().capitalize()
                 novo_tipo = novo_tipo if novo_tipo else linhas[2].split(":")[1].strip()
                 if novo_tipo in ["Cachorro", "Gato", "Ave", tipo]:
                     return novo_tipo
@@ -128,9 +128,9 @@ def visualizar_pet():
 
 def editar_pet():
     nome = validar_nome()
-
+    nome_arquivo_pet_anterior = f"Pet{nome}.txt"
     try:
-        with open(f"Pet{nome}.txt", "r", encoding="UTF-8") as file:
+        with open(nome_arquivo_pet_anterior, "r", encoding="UTF-8") as file:
             linhas = file.readlines()
 
         if len(linhas) < 3 or not all(":" in linha for linha in linhas[:3]):
@@ -165,8 +165,12 @@ def editar_pet():
         linhas[1] = f"Idade: {str(nova_idade).strip()}\n"
         linhas[2] = f"Tipo: {novo_tipo.strip()}\n"
         linhas[3] = f"Porte: {novo_porte.strip()}\n"
+        
+        nome_arquivo_pet = f"Pet{novo_nome}.txt"
+        
+        os.remove(nome_arquivo_pet_anterior)
 
-        with open(f"Pet{nome}.txt", "w", encoding="UTF-8") as file:
+        with open(nome_arquivo_pet, "w", encoding="UTF-8") as file:
             file.writelines(linhas)
 
         print(f"Arquivo Pet{nome}.txt atualizado com sucesso!")
