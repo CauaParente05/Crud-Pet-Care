@@ -50,17 +50,16 @@ def solicitar_data():
 
 
 def menu_eventos():
-    print("-="*12,)
+    print("-="*20,)
     print('MENU CUIDADOS COM O PET')
-    print("-="*12,)
+    print("-="*20,)
     print('1. Adicionar eventos (Vacina/Consulta/Rémedio)')
     print('2. Visualizar eventos (Vacina/Consulta/Rémedio)')
     print('3. Editar eventos (Vacina/Consulta/Rémedio)')
     print('4. Excluir eventos (Vacina/Consulta/Rémedio)')
-    print('5. Para Menu Principal')
-    print('6. Para Menu de Cuidados com Pet')
-    print('7. Para Finalizar')
-    print("-="*12,)
+    print('5. Para Menu Principal (adicionar Pets)')
+    print('6. Para Finalizar')
+    print("-="*20,)
 
 
 def add_eventos():

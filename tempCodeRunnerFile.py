@@ -1,1 +1,0 @@
- semana_futura_num = hoje_num + 7

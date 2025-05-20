@@ -5,7 +5,7 @@ import sys
 
 
 def menu_principal():
-    print("-="*12,)
+    print("-="*20,)
     print('MENU PRINCIPAL COM O PET')
     print("-="*12,)
     print('1. Adicionar PETS (Cachorro/Gato/Ave)')
@@ -14,7 +14,7 @@ def menu_principal():
     print('4. Excluir Pet (Cachorro/Gato/Ave)')
     print('5. Menu de Eventos Pet')
     print('6. Para Finalizar')
-    print("-="*12,)
+    print("-="*20,)
 
 
 def validar_nome():
