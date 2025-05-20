@@ -1,3 +1,3 @@
-import funcoes 
+import menu_principal
 
-funcoes.escolhas_menu()
+menu_principal.escolhas_menu()

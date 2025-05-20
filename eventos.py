@@ -1,5 +1,6 @@
 import os
-import funcoes
+import menu_principal
+import cuidados
 import time
 import sys
 import datetime
@@ -7,7 +8,6 @@ import datetime
 
 def data_formatada(data):
     return data.replace("/", "")
-
 
 def validar_vacina():
     while True:
@@ -18,7 +18,6 @@ def validar_vacina():
         else:
             print("Erro: O campo de vacina deve conter apenas letras! Tente novamente.")
 
-
 def validar_consulta():
     while True:
         consulta = input("Digite o tipo de consulta: ").strip()
@@ -28,10 +27,8 @@ def validar_consulta():
         else:
             print("Erro: O campo de consulta deve conter apenas letras! Tente novamente.")
 
-
 def formatar_data_para_visualizacao(data):
     return f"{data[:4]}/{data[4:6]}/{data[6:]}"
-
 
 def valida_data(data):
     try:
@@ -60,13 +57,14 @@ def menu_eventos():
     print('2. Visualizar eventos (Vacina/Consulta/Rémedio)')
     print('3. Editar eventos (Vacina/Consulta/Rémedio)')
     print('4. Excluir eventos (Vacina/Consulta/Rémedio)')
-    print('5. Para Menu Principal (adicionar Pets)')
-    print('6. Para Finalizar')
+    print('5. Para Menu Principal')
+    print('6. Para Menu de Cuidados com Pet')
+    print('7. Para Finalizar')
     print("-="*12,)
 
 
 def add_eventos():
-    nome = funcoes.validar_nome()
+    nome = menu_principal.validar_nome()
     try:
         if os.path.isfile(f"Pet{nome}.txt"):
             data = solicitar_data()
@@ -79,8 +77,7 @@ def add_eventos():
                 file.write(f"Data: {data_formatada(data)}\n")
                 file.write(f"Vacina: {vacina}\n")
                 file.write(f"Consulta: {consulta}\n")
-                file.write(
-                    f"Data para a próxima Consulta: {data_formatada(data_consulta)}\n")
+                file.write( f"Data para a próxima Consulta: {data_formatada(data_consulta)}\n")
 
         print(f"Evento {nome_arquivo_evento} foi registrado com sucesso!")
     except FileNotFoundError as e:
@@ -88,7 +85,7 @@ def add_eventos():
 
 
 def visualizar_evento():
-    nome = funcoes.validar_nome()
+    nome = menu_principal.validar_nome()
     data = solicitar_data()  # Solicita a data do evento
     if not data:
         return
@@ -167,7 +164,7 @@ def editar_evento():
 
 
 def delete_eventos():
-    nome = funcoes.validar_nome()
+    nome = menu_principal.validar_nome()
     data_evento = solicitar_data()
     if not data_evento:
         return
@@ -204,8 +201,10 @@ def escolhas_menu_eventos():
         elif opcao == 4:
             delete_eventos()
         elif opcao == 5:
-            funcoes.menu_principal()
+            menu_principal.escolhas_menu()
         elif opcao == 6:
+            cuidados.escolhas_menu_cuidados()
+        elif opcao == 7:
             print("PROGRAMA ENCERRADO")
             sys.exit()
         else:
