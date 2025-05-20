@@ -106,10 +106,19 @@ python main.py
 
 <details>
 
-<summary>👥 Disciplina:</summary>
+<summary>🧠 Disciplina:</summary>
 Este projeto foi desenvolvido para a disciplina de FUNDAMENTOS DE PROGRAMAÇÃO
 Docente da disciplina: ANA CAROLINA CANDIDO DE MELO 
 
+</details>
+<details>
+
+<summary>👥 Membros do Grupo:</summary>
+- Cauã Henrique Cardozo Carneiro Parente
+- Maria Eduarda Souza de Oliveira
+- Danilo Araújo Duleba
+- Mateus Dornellas Camara de Freitas
+- Manuela de Oliveira Nogueira
 </details>
 
 ## 📄 Licença

@@ -47,7 +47,15 @@ def solicitar_data():
         else:
             print(
                 "Formato de data inválido! Tente novamente no formato correto (AAAA/MM/DD).")
-
+            
+def solicitar_data_consulta():
+    while True:
+        data = input("Digite a data da próxima consulta (AAAA/MM/DD): ").strip()
+        if valida_data(data):
+            return data
+        else:
+            print(
+                "Formato de data inválido! Tente novamente no formato correto (AAAA/MM/DD).")
 
 def menu_eventos():
     print("-="*20,)
@@ -59,7 +67,7 @@ def menu_eventos():
     print('4. Excluir eventos (Vacina/Consulta/Rémedio)')
     print('5. Para Menu Principal')
     print('6. Para Menu de Cuidados')
-    print('6. Para Finalizar')
+    print('7. Para Finalizar')
     print("-="*20,)
 
 
@@ -70,7 +78,7 @@ def add_eventos():
             data = solicitar_data()
             vacina = validar_vacina()
             consulta = validar_consulta()
-            data_consulta = solicitar_data()
+            data_consulta = solicitar_data_consulta()
             nome_arquivo_evento = f"Evento_{nome}_{data_formatada(data)}.txt"
             with open(nome_arquivo_evento, "w", encoding="UTF-8") as file:
                 file.write(f"Nome: {nome}\n")
