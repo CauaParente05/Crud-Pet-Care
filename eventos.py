@@ -57,7 +57,8 @@ def menu_eventos():
     print('2. Visualizar eventos (Vacina/Consulta/Rémedio)')
     print('3. Editar eventos (Vacina/Consulta/Rémedio)')
     print('4. Excluir eventos (Vacina/Consulta/Rémedio)')
-    print('5. Para Menu Principal (adicionar Pets)')
+    print('5. Para Menu Principal')
+    print('6. Para Menu de Cuidados')
     print('6. Para Finalizar')
     print("-="*20,)
 
