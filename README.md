@@ -37,7 +37,7 @@ O Pet Care é um sistema desenvolvido para a disciplina de Fundamentos da Progra
 
 <details>
 
-<summary>📦 Estrutura do Projeto</summary>
+## 📦 Estrutura do Projeto
 ```
 Crud-Pet-Care/
 ├── eventos.py      # Gerenciamento de eventos e cuidados
@@ -46,8 +46,6 @@ Crud-Pet-Care/
 ├── tttv1.py        # Módulo de recomendações personalizadas
 └── rascunho1.py    # Arquivo de desenvolvimento
 ```
-</details>
-
 <details>
 
 <summary>🚀 Como Executar</summary>
