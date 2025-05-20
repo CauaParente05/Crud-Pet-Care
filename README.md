@@ -1,9 +1,14 @@
 # 🐾 Pet Care - Sistema de Gerenciamento de Pets
 
-## 📋 Sobre o Projeto
+<details>
+
+<summary>📋 Sobre o Projeto</summary>
 O Pet Care é um sistema desenvolvido para a disciplina de Fundamentos da Programação da CESAR School. Este projeto visa facilitar o gerenciamento e acompanhamento dos cuidados com animais de estimação, oferecendo funcionalidades completas para registro, monitoramento e controle de eventos relacionados à saúde e bem-estar dos pets.
 
-## ✨ Funcionalidades
+</details>
+
+<details>
+<summary>✨ Funcionalidades</summary>
 
 ### 🐕 Gerenciamento de Pets
 - Cadastro de pets (cachorros, gatos e aves)
@@ -23,12 +28,16 @@ O Pet Care é um sistema desenvolvido para a disciplina de Fundamentos da Progra
 - Orientações por porte (pequeno, médio, grande)
 - Dicas de cuidados preventivos
 
+</details>
+
 ## 🛠️ Tecnologias Utilizadas
 <div>
    <img src=https://img.shields.io/badge/Python-black?style=for-the-badge&logo=python&logoColor=white&logoSize=auto>
 </div>
 
-## 📦 Estrutura do Projeto
+<details>
+
+<summary>📦 Estrutura do Projeto</summary>
 ```
 Crud-Pet-Care/
 ├── eventos.py      # Gerenciamento de eventos e cuidados
@@ -37,8 +46,11 @@ Crud-Pet-Care/
 ├── tttv1.py        # Módulo de recomendações personalizadas
 └── rascunho1.py    # Arquivo de desenvolvimento
 ```
+</details>
 
-## 🚀 Como Executar
+<details>
+
+<summary>🚀 Como Executar</summary>
 
 1. Clone o repositório:
 ```bash
@@ -54,8 +66,11 @@ cd Crud-Pet-Care
 ```bash
 python main.py
 ```
+</details>
 
-## 📝 Funcionalidades Detalhadas
+<details>
+
+<summary>📝 Funcionalidades Detalhadas</summary>
 
 ### Menu Principal
 - Adicionar Pets
@@ -72,7 +87,11 @@ python main.py
 - Excluir eventos
 - Retornar ao Menu Principal
 
-## 🎯 Características do Sistema
+</details>
+
+<details>
+
+<summary>🎯 Características do Sistema</summary>
 
 ### Validações Implementadas
 - Verificação de nomes (apenas letras)
@@ -85,9 +104,15 @@ python main.py
 - Organização por nome do pet
 - Registros de eventos datados
 
-## 👥 Disciplina:
+</details>
+
+<details>
+
+<summary>👥 Disciplina:</summary>
 Este projeto foi desenvolvido para a disciplina de FUNDAMENTOS DE PROGRAMAÇÃO
 Docente da disciplina: ANA CAROLINA CANDIDO DE MELO 
+
+</details>
 
 ## 📄 Licença
 Este projeto está licenciado sob os termos da [MIT License](LICENSE).
