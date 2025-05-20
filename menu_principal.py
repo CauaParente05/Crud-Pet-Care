@@ -5,9 +5,9 @@ import sys
 import cuidados
 
 def menu_principal():
-    print("-="*12,)
+    print("-="*20,)
     print('MENU PRINCIPAL COM O PET')
-    print("-="*12,)
+    print("-="*20,)
     print('1. Adicionar PETS (Cachorro/Gato/Ave)')
     print('2. Visualizar Pet (Cachorro/Gato/Ave)')
     print('3. Editar Pet (Cachorro/Gato/Ave)')
@@ -15,7 +15,7 @@ def menu_principal():
     print('5. Menu de Eventos Pet')
     print('6. Menu de Cuidados com Pet')
     print('7. Para Finalizar')
-    print("-="*12,)
+    print("-="*20,)
 
 # Verificações:---------------------------------------|
 

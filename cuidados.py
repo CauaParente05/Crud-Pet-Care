@@ -5,16 +5,16 @@ import time
 import sys
 
 def menu_cuidados():
-    print("-="*12,)
+    print("-="*20,)
     print('MENU DE CUIDADOS COM O PET')
-    print("-="*12,)
+    print("-="*20,)
     print('1. Visualizar Cuidados do Pet')
     print('2. Editar Cuidados do Pet')
     print('3. Excluir Cuidados do Pet')
     print('4. Para Menu Principal')
     print('5. Para Menu de Eventos de Pet')
     print('6. Para Finalizar')
-    print("-="*12,)
+    print("-="*20,)
     
 def salvar_cuidados(nome, tipo, porte, idade):
     idade_categoria = categorizar_idade(tipo, idade)
