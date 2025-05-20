@@ -52,20 +52,63 @@ def editar_cuidados(nome):
         with open(f"Cuidados_{nome}.txt", "r", encoding="UTF-8") as file:
             linhas = file.readlines()
 
-        nova_idade = int(input("Digite a nova idade do pet: "))
-        tipo = menu_principal.validar_tipo()
-        porte = menu_principal.validar_porte()
-        
-        idade_categoria = categorizar_idade(tipo.lower(), nova_idade)
-        cuidados = obter_cuidados(tipo.lower(), porte, idade_categoria)
+        if len(linhas) < 5:
+            print("Erro: O formato do arquivo está incorreto!")
+            return
 
-        linhas[3] = f"Idade: {nova_idade} anos ({idade_categoria})\n"
-        linhas[4] = f"Cuidados recomendados:\n{cuidados}\n"
+        print("\nInformações atuais do pet:")
+        print(f"1. Nome: {linhas[0].split(':')[1].strip()}")
+        print(f"2. Tipo: {linhas[1].split(':')[1].strip()}")
+        print(f"3. Porte: {linhas[2].split(':')[1].strip()}")
+        print(f"4. Idade: {linhas[3].split(':')[1].strip()}")
 
-        with open(f"Cuidados_{nome}.txt", "w", encoding="UTF-8") as file:
-            file.writelines(linhas)
+        # Solicita ao usuário as novas informações, permitindo manter as anteriores
+        novo_nome = input("Novo nome (pressione Enter caso não deseje trocar): ").strip().capitalize()
+        novo_nome = novo_nome if novo_nome else linhas[0].split(":")[1].strip()
 
-        print(f"Arquivo 'Cuidados_{nome}.txt' atualizado com sucesso!")
+        nova_idade = input("Nova idade (pressione Enter caso não deseje trocar): ").strip()
+        try:
+            nova_idade = int(nova_idade) if nova_idade else int(linhas[3].strip().split(":")[1].split()[0])
+        except ValueError:
+            print("Erro: Idade inválida! Deve ser um número.")
+            return
+
+        novo_tipo = input("Novo tipo (Cachorro/Gato/Ave) ou (pressione Enter caso não deseje trocar): ").strip().capitalize()
+        if not novo_tipo:
+            novo_tipo = linhas[1].split(":")[1].strip()
+        elif novo_tipo not in ["Cachorro", "Gato", "Ave"]:
+            print("Tipo inválido! Escolha entre (Cachorro/Gato/Ave).")
+            return
+
+        novo_porte = input("Novo porte (Pequeno/Médio/Grande porte) ou (pressione Enter caso não deseje trocar): ").strip().capitalize()
+        if not novo_porte:
+            novo_porte = linhas[2].split(":")[1].strip()
+        else:
+            if novo_porte == "Medio":
+                novo_porte = "Médio"
+            elif novo_porte == "Grande":
+                novo_porte = "Grande porte"
+
+            if novo_porte not in ["Pequeno", "Médio", "Grande porte"]:
+                print("Porte inválido! Escolha entre (Pequeno/Médio/Grande porte).")
+                return
+
+        idade_categoria = categorizar_idade(novo_tipo.lower(), nova_idade)
+
+        if novo_tipo != linhas[1].split(":")[1].strip() or novo_porte != linhas[2].split(":")[1].strip():
+            cuidados = obter_cuidados(novo_tipo.lower(), novo_porte, idade_categoria)
+        else:
+            cuidados = linhas[4].split("Cuidados recomendados:")[1].strip()
+
+        with open(f"Cuidados_{novo_nome}.txt", "w", encoding="UTF-8") as file:
+            file.write(f"Nome: {novo_nome}\n")
+            file.write(f"Tipo: {novo_tipo}\n")
+            file.write(f"Porte: {novo_porte}\n")
+            file.write(f"Idade: {nova_idade} anos ({idade_categoria})\n")
+            file.write(f"Cuidados recomendados:\n{cuidados}\n")
+
+        print(f"Arquivo 'Cuidados_{novo_nome}.txt' atualizado com sucesso!")
+
     except FileNotFoundError:
         print(f"Erro: O arquivo de cuidados do pet '{nome}' não existe.")
 

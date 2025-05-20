@@ -57,8 +57,12 @@ def validar_novo_porte(nome, porte):
         try:
             with open(f"Pet{nome}.txt", "r", encoding="UTF-8") as file:
                 linhas = file.readlines()
-                novo_porte = input("Novo porte (pressione Enter caso não deseje trocar): ").strip().capitalize()
+                novo_porte = input("Novo porte (Cachorro/Gato/Ave) ou (pressione Enter caso não deseje trocar): ").strip().capitalize()
                 novo_porte = novo_porte if novo_porte else linhas[3].split(":")[1].strip()[1].strip()
+                if novo_porte == "Medio":
+                    novo_porte = "Médio"
+                elif novo_porte == "Grande":
+                    novo_porte = "Grande porte"
                 if novo_porte in ["Pequeno", "Médio", "Grande porte", porte]:
                     return novo_porte
                 else:
